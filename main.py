@@ -19,12 +19,19 @@ def main():
     im0 = cv2.imread(paths[0])
     h = im0.shape[0]
     row = h // 2
-    out = np.empty((len(paths), im0.shape[1], im0.shape[2]), dtype=im0.dtype)
-    out[0] = im0[row, :, :]
 
+    #allocating array size for the given image sizes and number
+    out = np.empty(
+        (len(paths), im0.shape[1], im0.shape[2]),
+        dtype=im0.dtype
+    )
+
+    #extract the same row from every image and put in out array
+    out[0] = im0[row, :, :]
     for i, p in enumerate(paths[1:], start=1):
         im = cv2.imread(p)
         out[i] = im[row, :, :]
+        #print(f"Processed {os.path.basename(p)}")
 
     cv2.imwrite(OUTPUT_FILE, out)
     print(f"Wrote {OUTPUT_FILE}")
