@@ -28,13 +28,18 @@ def main():
 
     #extract the same row from every image and put in out array
     out[0] = im0[row, :, :]
+    print(im0[row, :, :])
     for i, p in enumerate(paths[1:], start=1):
         im = cv2.imread(p)
         out[i] = im[row, :, :]
         #print(f"Processed {os.path.basename(p)}")
 
-    cv2.imwrite(OUTPUT_FILE, out)
+    cv2.imwrite(OUTPUT_FILE, out[::-1])
     print(f"Wrote {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
+
+#overlap imaging
+#RGB
+#sat data tidsforyvning mellom frekvenser
